@@ -1,0 +1,55 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Email extends CI_Controller {
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->model('Konsumen_model');
+  }
+  public function index($id){
+      $data['judul']= 'Kirim Email';
+        $data['konsumen'] = $this->Konsumen_model->getKonsumenById($id);
+$data['pesan']='0';
+      $this->load->view('templates/header', $data);
+      $this->load->view('email',$data);
+      $this->load->view('templates/footer', $data);
+	}
+	public function send($id){
+		$this->load->library('mailer');
+		$email_penerima = $this->input->post('email_penerima');
+		$subjek = $this->input->post('subjek');
+		$pesan = $this->input->post('pesan');
+		//$attachment = $_FILES['attachment'];
+		$content = $this->load->view('content', array('pesan'=>$pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+		$sendmail = array(
+			'email_penerima'=>$email_penerima,
+			'subjek'=>$subjek,
+			'content'=>$content
+			// 'attachment'=>$attachment
+		);
+		if(empty($attachment['name'])){ // Jika tanpa attachment
+			$send = $this->mailer->send($sendmail); // Panggil fungsi send yang ada di librari Mailer
+		}else{ // Jika dengan attachment
+			$send = $this->mailer->send_with_attachment($sendmail); // Panggil fungsi send_with_attachment yang ada di librari Mailer
+		}
+    if ($send['status'] == "Sukses") {
+      $data['pesan']='2';
+      $data['judul']= 'Kirim Email';
+        $data['konsumen'] = $this->Konsumen_model->getKonsumenById($id);
+      $this->load->view('templates/header', $data);
+      $this->load->view('email',$data);
+      $this->load->view('templates/footer', $data);
+    }else {
+      $data['pesan']='1';
+      $data['judul']= 'Kirim Email';
+        $data['konsumen'] = $this->Konsumen_model->getKonsumenById($id);
+      $this->load->view('templates/header', $data);
+      $this->load->view('email',$data);
+      $this->load->view('templates/footer', $data);
+    }
+  	// echo "<b>".$send['status']."</b><br />";
+		// echo $send['message'];
+		// echo "<br /><a href='".base_url("konsumen")."'>Kembali ke Form</a>";
+	}
+}
