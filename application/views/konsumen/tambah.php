@@ -18,7 +18,7 @@
                 <label for="nik">Cari NIK</label>
                 <input type="number" name="nik" class="form-control" id="nik" required>
                 <small class="form-text text-danger"><?= form_error('nik'); ?></small>
-                <button type="submit" name="button">Cari</button>
+                <button type="submit"class="btn btn-mint" style="padding-left:5%;padding-right:5%;"name="button">Cari</button>
               </div>
              </form>
             <form class="" action="<?= base_url().'simpan' ?>" method="post">

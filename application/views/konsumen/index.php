@@ -11,13 +11,6 @@
       </div>
     </div>
   <?php endif; ?>
-  <div class="row mt-3">
-    <div class="col-md-6">
-      <a href="<?= base_url();?>konsumen/tambah" class="btn btn-primary">Tambah Data Konsumen</a>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-light mr-sm-2 " data-toggle="modal" data-target="#exampleModal">Cetak Berkas</button>
-    </div>
-  </div>
   <div class="row mt-5 justify-content-center">
     <div class="col-md-6">
       <form action="<?= base_url('konsumen'); ?>" method="post">
@@ -25,7 +18,7 @@
           <input type="text" class="form-control" placeholder="Cari data konsumen.." name="keyword"
           autocomplete="off" autofocus>
           <div class="input-group-append">
-            <input class="btn btn-primary" type="submit" name="submit">
+            <input class="btn btn-primary" type="submit" name="submit" value="Cari Data">
           </div>
         </div>
       </form>
@@ -48,7 +41,7 @@
             <th>Type</th>
             <th>Email</th>
             <th>Tanggal</th>
-            <th>Action</th>
+            <th><center>Action</center></th>
           </tr>
         </thead>
         <tbody>
@@ -61,24 +54,19 @@
               <td><?= $ksm['email']; ?></td>
               <td><?=date('d F Y', strtotime($ksm['tanggal'])); ?></td>
               <td>
-                <a href="<?= base_url(); ?>ubah/<?= $ksm['id']; ?>" class="btn btn-success float-right ml-2">ubah</a>
+                <a href="<?= base_url(); ?>ubah/<?= $ksm['id']; ?>" class="btn btn-success float-right ml-2"><i class="fa fa-edit mr-2"></i>ubah</a>
                 <a href="<?= base_url(); ?>detail/<?= $ksm['id']; ?>" class="btn btn-primary float-right ml-2">detail</a>
-                <a href="<?= base_url(); ?>kirim/<?= $ksm['id']; ?>" class="btn btn-warning float-right ml-2">kirim</a>
+                <a href="<?= base_url(); ?>kirim/<?= $ksm['id']; ?>" class="btn btn-warning float-right ml-2"><i class="fa fa-upload mr-2"></i>kirim</a>
                 <a href="<?= base_url().'pengambilan/'.$ksm['norang'] ?>" class="btn btn-info float-right">Ambil</a>
               </td>
-
             </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
-
-      <?= $this->pagination->create_links(); ?>
-
+      <?= $pagination; ?>
     </div>
   </div>
 </div>
-
-
 <!-- Modal Cetak Berkas-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -98,7 +86,7 @@
               </td>
               <td>
                 <div class="form-group">
-                  <input type="date" name="tgl_a" class="form-control" required>
+                  <input type="date" name="tgl_a" class="form-control" >
                 </div>
               </td>
             </tr>
@@ -108,7 +96,7 @@
               </td>
               <td>
                 <div class="form-group">
-                  <input type="date" name="tgl_b" class="form-control" required>
+                  <input type="date" name="tgl_b" class="form-control" >
                 </div>
               </td>
             </tr>
@@ -119,14 +107,15 @@
               </td>
             </tr>
           </table>
-
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Cetak Tanggal Hari Ini</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <input type="submit" name="print" class="btn btn-danger" value="Cetak">
+          <input type="submit" name="print" class="btn btn-danger float-right" value="Cetak">
+          <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Close</button>
+        </form>
+          <form target="_blank">
+            <button type="submit" class="btn btn-primary float-left" formaction="<?= base_url().'cetak_today' ?>">Cetak Tanggal Hari Ini</button>
+          </form>
         </div>
-      </form>
     </div>
   </div>
 </div>

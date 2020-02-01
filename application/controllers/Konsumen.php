@@ -9,7 +9,7 @@ class Konsumen extends CI_Controller {
     $this->load->library('form_validation');
   }
   public function index(){
-    if (isset($this->session->uid)) {
+    // if (isset($this->session->uid)) {
       $data['judul'] = 'Daftar Konsumen';
       //load library
       $this->load->library('pagination');
@@ -22,22 +22,23 @@ class Konsumen extends CI_Controller {
       }
       //config
       $this->db->like('nama', $data['keyword']);
-
       $this->db->from('konsumen');
       $this->db->join('detail_kendaraan','nik');
       $config['total_rows'] = $this->db->count_all_results();
       $config['per_page'] = 5;
-
       //initialize
+      $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
+      $config['full_tag_close']   = '</ul></nav></div>';
+      $this->pagination->initialize($config);
       $data['start'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0 ;
       $data['konsumen'] = $this->Konsumen_model->getKonsumen($config['per_page'], $data['start'], $data['keyword']);
-      $this->pagination->initialize($config);
+      $data['pagination'] = $this->pagination->create_links();
       $this->load->view('templates/header', $data);
       $this->load->view('konsumen/index' ,$data);
       $this->load->view('templates/footer');
-    }else {
-      redirect('/login_page');
-    }
+    // }else {
+    //   redirect('/login_page');
+    // }
   }
   public function ambil($id){
     $data['ambil'] = $this->Konsumen_model->ambil($id);
@@ -67,7 +68,13 @@ class Konsumen extends CI_Controller {
     $this->load->view('templates/header', $data);
     $this->load->view('konsumen/tambah',$data);
     $this->load->view('templates/footer');
-
+  }
+  public function simpan_pengambilan(){
+    $data['judul'] = 'Daftar Konsumen';
+    $this->Konsumen_model->tambahpengambilan();
+    $this->load->view('templates/header', $data);
+    $this->load->view('konsumen/index',$data);
+    $this->load->view('templates/footer');
   }
   public function detail($id)
   {
@@ -119,6 +126,11 @@ class Konsumen extends CI_Controller {
     $data['key']= '2';
     $this->load->view('print_konsumen',$data);
   }
+  public function cetak_hari_ini(){
+    $data['cetak'] = $this->Model_cetak->cetak_today();
+    $data['key'] = '2';
+    $this->load->view('print_konsumen',$data);
+  }
 
   public function cari(){
     $data['judul'] = 'Suraco';
@@ -127,8 +139,5 @@ class Konsumen extends CI_Controller {
     $this->load->view('templates/header', $data);
     $this->load->view('pelanggan/index', $data);
     $this->load->view('templates/footer');
-
   }
-
-
 }

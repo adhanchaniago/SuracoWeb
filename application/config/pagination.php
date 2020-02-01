@@ -1,6 +1,6 @@
 <?php
 // config
-  $config['base_url'] = 'http://localhost/admin/konsumen/index';
+  $config['base_url'] = base_url('konsumen/index');
   $config['num_links'] = 3;
 
 // styling

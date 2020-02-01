@@ -22,6 +22,51 @@ class Konsumen_model extends CI_model {
     ];
     $this->db->insert('konsumen', $data);
   }
+  public function tambahpengambilan(){
+    $norang = $this->input->post('norang');
+    $status1 = $this->input->post('stnk');
+    $tgl1 = $this->input->post('tgl_stnk',true);
+    $tgl2 = $this->input->post('tgl_plat',true);
+    $query = $this->db->query("SELECT * FROM detail_pengambilan where norang='" .$norang. "'");
+    $row = $query->row();
+    if (isset($row)) {
+      if (isset($status1)) {
+        $data=[
+          "nama2" => $this->input->post('pengambil_plat',true),
+          "tgl2" => date('Y-m-d',strtotime($tgl2)),
+          "status2" => $this->input->post('plat',true)
+        ];
+        $this->db->where('norang', $norang);
+        $this->db->update('detail_pengambilan', $data);
+      }else {
+        $data=[
+          "nama1" => $this->input->post('pengambil_stnk',true),
+          "tgl1" => date('Y-m-d',strtotime($tgl1)),
+          "status1" => $this->input->post('stnk',true)
+        ];
+        $this->db->where('norang', $norang);
+        $this->db->update('detail_pengambilan', $data);
+      }
+    }else {
+      if (isset($status1)) {
+        $data = [
+          "norang" => $this->input->post('norang',true),
+          "status1" => $this->input->post('stnk',true),
+          "tgl1" => date('Y-m-d',strtotime($tgl1)),
+          "nama1" => $this->input->post('pengambil_stnk',true),
+        ];
+        $this->db->insert('detail_pengambilan', $data);
+      }else {
+        $data = [
+          "norang" => $this->input->post('norang',true),
+          "status2" => $this->input->post('plat',true),
+          "tgl2" => date('Y-m-d',strtotime($tgl2)),
+          "nama2" => $this->input->post('pengambil_plat',true)
+        ];
+        $this->db->insert('detail_pengambilan', $data);
+      }
+    }
+  }
   public function tambahDataKendaraan(){
     $data = [
       "nik" => $this->input->post('nik',true),
@@ -37,45 +82,36 @@ class Konsumen_model extends CI_model {
     return $this->db->get('konsumen')->num_rows();
   }
   public function ambil($id){
-    $query = $this->db->query("SELECT * FROM detail_kendaraan where norang= '".$id."'");
+    $query = $this->db->query("SELECT * FROM detail_pengambilan where norang= '".$id."'");
     return $query->row_array();
   }
-
-  public function hapusDataKonsumen($id)
-  {
+  public function hapusDataKonsumen($id){
     $this->db->where('id', $id);
     $this->db->delete('konsumen');
   }
-
-  public function getKonsumenById($id)
-  {
+  public function getKonsumenById($id){
     $query = $this->db->query("SELECT * From konsumen inner join detail_kendaraan using(nik) where id='".$id."'");
     return $query->row_array();
   }
-  public function cari()
-  {
+  public function cari(){
     $nik = $this->input->post('nik');
     $query = $this->db->query("SELECT * From konsumen  where nik='".$nik."'");
     return $query->row_array();
   }
 
-  public function ubahDataKonsumen($id)
-  {
+  public function ubahDataKonsumen($id){
     $data = [
-
       "nama" => $this->input->post('nama',true),
       "alamat" => $this->input->post('alamat',true),
       "telp" => $this->input->post('telp',true),
       "email" => $this->input->post('email',true)
     ];
-
     $this->db->where('id', $id);
     $this->db->update('konsumen', $data);
     $data=[
       "type" => $this->input->post('type',true),
       "status" => $this->input->post('status',true)
     ];
-
     $this->db->where('nik', $this->input->post('nik'));
     $this->db->update('detail_kendaraan', $data);
   }

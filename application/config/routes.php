@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['cetak'] = 'konsumen/cetak';
+$route['cetak_today'] = 'konsumen/cetak_hari_ini';
 $route['logout'] = 'auth/logout';
 $route['kirim/(:any)'] = 'email/index/$1';
 $route['cari'] = 'konsumen/cariuser';
@@ -18,8 +19,10 @@ $route['login']           = 'auth/login';
 $route['register']           = 'auth/register';
 $route['req']           = 'auth/reg';
 $route['login_page']           = 'auth';
+$route['import']           = 'importdata';
 
 $route['pengambilan/(:any)']           = 'Konsumen/ambil/$1';
+$route['simpan_pengambilan']           = 'Konsumen/simpan_pengambilan';
 $route['default_controller']  = 'Konsumen';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

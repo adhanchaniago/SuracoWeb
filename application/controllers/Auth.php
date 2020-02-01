@@ -13,9 +13,9 @@ class Auth extends CI_Controller {
   public function index(){
     $data['title'] = 'Login User';
     $data['pesan'] = '0';
-    $this->load->view('templates/auth_header', $data);
+    $this->load->view('templates/header', $data);
     $this->load->view('auth/login',$data);
-    $this->load->view('templates/auth_footer');
+    $this->load->view('templates/footer');
   }
   public function login(){
     $email = $this->input->post('email');
@@ -28,16 +28,16 @@ class Auth extends CI_Controller {
     }else {
       $data['pesan']="1";
       $data['title'] = 'Login User';
-      $this->load->view('templates/auth_header', $data);
+      $this->load->view('templates/header', $data);
       $this->load->view('auth/login', $data);
-      $this->load->view('templates/auth_footer');
+      $this->load->view('templates/footer');
     }
   }
   public function register(){
     $data['title'] = 'Register User';
-    $this->load->view('templates/auth_header', $data);
+    $this->load->view('templates/header', $data);
     $this->load->view('auth/regis');
-    $this->load->view('templates/auth_footer');
+    $this->load->view('templates/footer');
   }
   public function reg(){
     $pass1 = $this->input->post('password1');
