@@ -37,16 +37,22 @@
       <div class="navbar-content clearfix">
         <ul class="navbar-top-links pull-left">
           <div class="row mt-3">
+            <?php if (isset($this->session->uid)) {?>
             <a class="nav-item nav-link active" href="<?= base_url() ?>">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="<?= base_url();?>konsumen/tambah">Tambah Data Konsumen</a>
             <a class="nav-item nav-link" href="" data-toggle="modal" data-target="#exampleModal">Cetak Berkas</a>
             <a class="nav-item nav-link" href="<?= base_url().'import'?>" >Import Data</a>
+          <?php } ?>
           </div>
         </ul>
         <!--Navbar Dropdown-->
         <ul class="nav navbar-top-links pull-right">
           <div class="container mt-3">
+            <?php if (isset($this->session->uid)) {?>
             <a class="btn btn-danger my-2 my-sm-0" onclick="return confirm('yakin?');" href="<?= base_url().'logout'; ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+          <?php }else{ ?>
+            <a class="btn btn-danger my-2 my-sm-0" onclick="return confirm('yakin?');" href="<?= base_url().'login'; ?>"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+          <?php } ?>
           </div>
         </ul>
       </div>

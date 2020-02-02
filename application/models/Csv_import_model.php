@@ -1,11 +1,10 @@
 <?php
 class Csv_import_model extends CI_Model
 {
-	function select()
+	function tampilkan()
 	{
-		$this->db->order_by('id', 'DESC');
-		$query = $this->db->get('konsumen');
-		return $query;
+		$query = $this->db->query("SELECT * From konsumen order by id desc");
+		return $query->result_array();
 	}
 
 	function insert($data)

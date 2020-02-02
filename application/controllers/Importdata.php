@@ -9,54 +9,11 @@ class Importdata extends CI_Controller {
 	}
 	function index()
 	{
+		$data['info'] = $this->csv_import_model->tampilkan();
 		$data['judul'] = "Import Data";
 		$this->load->view('templates/header', $data);
-		$this->load->view('csv_import');
+		$this->load->view('csv_import',$data);
 		$this->load->view('templates/footer');
-	}
-	function load_data()
-	{
-		$result = $this->csv_import_model->select();
-		$output = '
-		<div class="table-responsive">
-		<table class="table table-bordered table-striped">
-		<tr>
-		<th>ID</th>
-		<th>Nik</th>
-		<th>Nama</th>
-		<th>Alamat</th>
-		<th>Kota</th>
-		<th>Telp</th>
-		<th>Email</th>
-		</tr>
-		';
-		if($result->num_rows() > 0)
-		{
-			foreach($result->result() as $row)
-			{
-				$output .= '
-				<tr>
-				<td>'.$row->id.'</td>
-				<td>'.$row->nik.'</td>
-				<td>'.$row->nama.'</td>
-				<td>'.$row->alamat.'</td>
-				<td>'.$row->kota.'</td>
-				<td>'.$row->telp.'</td>
-				<td>'.$row->email.'</td>
-				</tr>
-				';
-			}
-		}
-		else
-		{
-			$output .= '
-			<tr>
-			<td colspan="5" align="center">Data not Available</td>
-			</tr>
-			';
-		}
-		$output .= '</table></div>';
-		echo $output;
 	}
 
 	function import()
@@ -88,6 +45,7 @@ class Importdata extends CI_Controller {
 		}
 		$this->csv_import_model->insert($data);
 		$this->csv_import_model->insert1($data1);
+		redrect('/import');
 	}
 
 }
