@@ -94,6 +94,10 @@ class Konsumen_model extends CI_model {
     $query = $this->db->query("SELECT * From konsumen inner join detail_kendaraan using(nik) where id='".$id."'");
     return $query->row_array();
   }
+  public function getdetail($id1){
+    $query = $this->db->query("SELECT * From detail_pengambilan where norang='".$id1."'");
+    return $query->row_array();
+  }
   public function cari(){
     $nik = $this->input->post('nik');
     $query = $this->db->query("SELECT * From konsumen  where nik='".$nik."'");

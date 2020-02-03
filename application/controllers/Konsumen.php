@@ -75,12 +75,13 @@ class Konsumen extends CI_Controller {
     $this->Konsumen_model->tambahpengambilan();
     redirect('/');
   }
-  public function detail($id)
+  public function detail($id,$id1)
   {
     $data['judul']= 'Detail Data Konsumen';
     $data['konsumen'] = $this->Konsumen_model->getKonsumenById($id);
+    $data['ambil'] = $this->Konsumen_model->getdetail($id1);
     $this->load->view('templates/header', $data);
-    $this->load->view('konsumen/detail');
+    $this->load->view('konsumen/detail', $data);
     $this->load->view('templates/footer');
 
   }

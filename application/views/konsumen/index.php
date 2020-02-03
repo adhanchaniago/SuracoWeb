@@ -55,7 +55,7 @@
               <td><?=date('d F Y', strtotime($ksm['tanggal'])); ?></td>
               <td>
                 <a href="<?= base_url(); ?>ubah/<?= $ksm['id']; ?>" class="btn btn-success float-right ml-2"><i class="fa fa-edit mr-2"></i>ubah</a>
-                <a href="<?= base_url(); ?>detail/<?= $ksm['id']; ?>" class="btn btn-primary float-right ml-2">detail</a>
+                <a href="<?= base_url(); ?>detail/<?= $ksm['id']; ?>/<?= $ksm['norang']; ?>" class="btn btn-primary float-right ml-2">detail</a>
                 <a href="<?= base_url(); ?>kirim/<?= $ksm['id']; ?>" class="btn btn-warning float-right ml-2"><i class="fa fa-upload mr-2"></i>kirim</a>
                 <a href="<?= base_url().'pengambilan/'.$ksm['norang'] ?>" class="btn btn-info float-right">Ambil</a>
               </td>
