@@ -7,8 +7,7 @@ class Csv_import_model extends CI_Model
 		return $query->result_array();
 	}
 
-	function insert($data)
-	{
+	public function insert($data){
 		$this->db->insert_batch('konsumen', $data);
 	}
 	function insert1($data1)

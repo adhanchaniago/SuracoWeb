@@ -12,6 +12,7 @@
   <link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Roboto:500,400italic,100,700italic,300,700,500italic,400" rel="stylesheet">
   <!--Jasmine Stylesheet [ REQUIRED ]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link href="<?= base_url().'assets/css/style.css' ?>" rel="stylesheet">
   <link href="<?= base_url().'assets/css/custom_style.css' ?>" rel="stylesheet">
   <!--Font Awesome [ OPTIONAL ]-->
@@ -37,12 +38,11 @@
       <div class="navbar-content clearfix">
         <ul class="navbar-top-links pull-left">
           <div class="row mt-3">
-            <?php if (isset($this->session->uid)) {?>
+
             <a class="nav-item nav-link active" href="<?= base_url() ?>">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="<?= base_url();?>konsumen/tambah">Tambah Data Konsumen</a>
             <a class="nav-item nav-link" href="" data-toggle="modal" data-target="#exampleModal">Cetak Berkas</a>
             <a class="nav-item nav-link" href="<?= base_url().'import'?>" >Import Data</a>
-          <?php } ?>
           </div>
         </ul>
         <!--Navbar Dropdown-->

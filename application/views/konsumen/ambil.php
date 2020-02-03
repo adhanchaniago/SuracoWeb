@@ -8,7 +8,7 @@
 				</div>
 				<div class="card-body">
 					<form class="" action="<?= base_url().'simpan_pengambilan' ?>" method="post">
-						<input type="hidden" name="norang" value="<?= $ambil['norang'] ?>">
+						<input type="hidden" name="norang" value="<?= $norang; ?>">
 						<div class="row">
 							<div class="col-md-6">
 								<label for="nik">STNK</label>

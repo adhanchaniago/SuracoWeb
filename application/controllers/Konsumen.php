@@ -10,38 +10,39 @@ class Konsumen extends CI_Controller {
   }
   public function index(){
     // if (isset($this->session->uid)) {
-      $data['judul'] = 'Daftar Konsumen';
-      //load library
-      $this->load->library('pagination');
-      // ambil data keyword
-      if ($this->input->post('submit')){
-        $data['keyword'] = $this->input->post('keyword');
-        $this->session->set_userdata('keyword', $data['keyword']);
-      } else {
-        $data['keyword'] = '' ;
-      }
-      //config
-      $this->db->like('nama', $data['keyword']);
-      $this->db->from('konsumen');
-      $this->db->join('detail_kendaraan','nik');
-      $config['total_rows'] = $this->db->count_all_results();
-      $config['per_page'] = 5;
-      //initialize
-      $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
-      $config['full_tag_close']   = '</ul></nav></div>';
-      $this->pagination->initialize($config);
-      $data['start'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0 ;
-      $data['konsumen'] = $this->Konsumen_model->getKonsumen($config['per_page'], $data['start'], $data['keyword']);
-      $data['pagination'] = $this->pagination->create_links();
-      $this->load->view('templates/header', $data);
-      $this->load->view('konsumen/index' ,$data);
-      $this->load->view('templates/footer');
+    $data['judul'] = 'Daftar Konsumen';
+    //load library
+    $this->load->library('pagination');
+    // ambil data keyword
+    if ($this->input->post('submit')){
+      $data['keyword'] = $this->input->post('keyword');
+      $this->session->set_userdata('keyword', $data['keyword']);
+    } else {
+      $data['keyword'] = '' ;
+    }
+    //config
+    $this->db->like('nama', $data['keyword']);
+    $this->db->from('konsumen');
+    $this->db->join('detail_kendaraan','nik');
+    $config['total_rows'] = $this->db->count_all_results();
+    $config['per_page'] = 5;
+    //initialize
+    $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
+    $config['full_tag_close']   = '</ul></nav></div>';
+    $this->pagination->initialize($config);
+    $data['start'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0 ;
+    $data['konsumen'] = $this->Konsumen_model->getKonsumen($config['per_page'], $data['start'], $data['keyword']);
+    $data['pagination'] = $this->pagination->create_links();
+    $this->load->view('templates/header', $data);
+    $this->load->view('konsumen/index' ,$data);
+    $this->load->view('templates/footer');
     // }else {
     //   redirect('/login_page');
     // }
   }
   public function ambil($id){
     $data['ambil'] = $this->Konsumen_model->ambil($id);
+    $data['norang'] = $id;
     $this->load->view('templates/header');
     $this->load->view('konsumen/ambil',$data);
     $this->load->view('templates/footer');
@@ -70,11 +71,9 @@ class Konsumen extends CI_Controller {
     $this->load->view('templates/footer');
   }
   public function simpan_pengambilan(){
-    $data['judul'] = 'Daftar Konsumen';
+    // $data['judul'] = 'Daftar Konsumen';
     $this->Konsumen_model->tambahpengambilan();
-    $this->load->view('templates/header', $data);
-    $this->load->view('konsumen/index',$data);
-    $this->load->view('templates/footer');
+    redirect('/');
   }
   public function detail($id)
   {
