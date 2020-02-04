@@ -49,23 +49,35 @@ class Konsumen_model extends CI_model {
         $this->db->update('detail_pengambilan', $data);
       }
     }else {
-      // if (isset($cek)) {
+      if (isset($tgl1) && isset($tgl2)) {
         $data = [
           "norang" => $this->input->post('norang',true),
           "status1" => $this->input->post('stnk',true),
           "tgl1" => date('Y-m-d',strtotime($tgl1)),
           "nama1" => $this->input->post('pengambil_stnk',true),
+          "status2" => $this->input->post('plat',true),
+          "tgl2" => date('Y-m-d',strtotime($tgl2)),
+          "nama2" => $this->input->post('pengambil_plat',true)
         ];
         $this->db->insert('detail_pengambilan', $data);
-      // }else {
-      //   $data = [
-      //     "norang" => $this->input->post('norang',true),
-      //     "status2" => $this->input->post('plat',true),
-      //     "tgl2" => date('Y-m-d',strtotime($tgl2)),
-      //     "nama2" => $this->input->post('pengambil_plat',true)
-      //   ];
-      //   $this->db->insert('detail_pengambilan', $data);
-      // }
+      }else if(isset($tgl2)){
+        $data = [
+          "norang" => $this->input->post('norang',true),
+          "status2" => $this->input->post('plat',true),
+          "tgl2" => date('Y-m-d',strtotime($tgl2)),
+          "nama2" => $this->input->post('pengambil_plat',true)
+        ];
+        $this->db->insert('detail_pengambilan', $data);
+      }else {
+        $data = [
+          "norang" => $this->input->post('norang',true),
+          "status1" => $this->input->post('stnk',true),
+          "tgl1" => date('Y-m-d',strtotime($tgl2)),
+          "nama1" => $this->input->post('pengambil_stnk',true)
+        ];
+        $this->db->insert('detail_pengambilan', $data);
+
+      }
     }
   }
   public function tambahDataKendaraan(){
