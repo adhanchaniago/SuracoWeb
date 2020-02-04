@@ -18,6 +18,7 @@ class Konsumen_model extends CI_model {
       "nama" => $this->input->post('nama',true),
       "alamat" => $this->input->post('alamat',true),
       "telp" => $this->input->post('telp',true),
+      "kota" => $this->input->post('kota',true),
       "email" => $this->input->post('email',true)
     ];
     $this->db->insert('konsumen', $data);
@@ -85,9 +86,10 @@ class Konsumen_model extends CI_model {
       "nik" => $this->input->post('nik',true),
       "norang" => $this->input->post('norang',true),
       "type" => $this->input->post('type',true),
-      "status" => $this->input->post('status',true)
+      "status" => $this->input->post('status',true),
+      "tanggal" => $this->input->post('tgl',true)
     ];
-    $this->db->set('tanggal', 'NOW()', FALSE);
+    // $this->db->set('tanggal', 'NOW()', FALSE);
     $this->db->insert('detail_kendaraan', $data);
   }
 

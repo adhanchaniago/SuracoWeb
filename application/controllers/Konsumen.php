@@ -9,7 +9,7 @@ class Konsumen extends CI_Controller {
     $this->load->library('form_validation');
   }
   public function index(){
-    // if (isset($this->session->uid)) {
+    if (isset($this->session->uid)) {
     $data['judul'] = 'Daftar Konsumen';
     //load library
     $this->load->library('pagination');
@@ -36,9 +36,9 @@ class Konsumen extends CI_Controller {
     $this->load->view('templates/header', $data);
     $this->load->view('konsumen/index' ,$data);
     $this->load->view('templates/footer');
-    // }else {
-    //   redirect('/login_page');
-    // }
+    }else {
+      redirect('/login_page');
+    }
   }
   public function ambil($id){
     $data['ambil'] = $this->Konsumen_model->ambil($id);

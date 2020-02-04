@@ -57,7 +57,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label for="telp">Tanggal Pengambilan <?=  date('Y-m-d') ?></label>
+								<label for="telp">Tanggal Pengambilan</label>
 								<?php if (isset($ambil['status1'])){ ?>
 									<input type="date" name="tgl_stnk" class="form-control" id="telp " value="<?= $ambil['tgl1'] ?>" readonly >
 								<?php }else{ ?>

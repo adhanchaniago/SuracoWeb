@@ -14,6 +14,7 @@
                 </div>
             <?php endif; ?>
             <form  action="<?= base_url().'cari' ?>" method="post">
+              <input type="hidden" name="tgl" value="<?= date('d F Y') ?>">
             <div class="form-group">
                 <label for="nik">Cari NIK</label>
                 <input type="number" name="nik" class="form-control" id="nik" required>
@@ -43,8 +44,13 @@
                      <small class="form-text text-danger"><?= form_error('alamat'); ?></small>
               </div>
               <div class="form-group">
-                 <label for="status">Status STNK dan Plat</label>
-                 <select class="form-control" id="merk" name="merk">
+                    <label for="alamat">Kota</label>
+                    <input type="text" name="kota" class="form-control" id="alamat" value="<?= $user['kota'] ?>" required>
+                     <small class="form-text text-danger"><?= form_error('alamat'); ?></small>
+              </div>
+              <div class="form-group">
+                 <label for="status">Type</label>
+                 <select class="form-control" id="merk" name="type">
                    <option value="Yamaha Freego">Yamaha Freego</option>
                    <option value="Yamaha Nmax">Yamaha Nmax</option>
                    <option value="Yamaha Lexi">Yamaha Lexi</option>

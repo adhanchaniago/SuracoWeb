@@ -64,7 +64,7 @@ $(document).ready(function(){
       {
         $('#import_csv')[0].reset();
         $('#import_csv_btn').attr('disabled', false);
-        $('#import_csv_btn').html('Import Done');
+        $('#import_csv_btn').html('Import Selesai');
       }
     })
   });
