@@ -26,8 +26,8 @@ class Konsumen_model extends CI_model {
   public function tambahpengambilan(){
     $norang = $this->input->post('norang');
     $status1 = $this->input->post('stnk');
-    $tgl1 = $this->input->post('tgl_stnk',true);
-    $tgl2 = $this->input->post('tgl_plat',true);
+    $tgl1 = $this->input->post('tgl_stnk');
+    $tgl2 = $this->input->post('tgl_plat');
     $query = $this->db->query("SELECT * FROM detail_pengambilan where norang='".$norang."'");
     $row = $query->row_array();
     $cek = $row['status1'];
@@ -50,15 +50,12 @@ class Konsumen_model extends CI_model {
         $this->db->update('detail_pengambilan', $data);
       }
     }else {
-      if (isset($tgl1) && isset($tgl2)) {
+      if (isset($tgl1)) {
         $data = [
           "norang" => $this->input->post('norang',true),
           "status1" => $this->input->post('stnk',true),
           "tgl1" => date('Y-m-d',strtotime($tgl1)),
-          "nama1" => $this->input->post('pengambil_stnk',true),
-          "status2" => $this->input->post('plat',true),
-          "tgl2" => date('Y-m-d',strtotime($tgl2)),
-          "nama2" => $this->input->post('pengambil_plat',true)
+          "nama1" => $this->input->post('pengambil_stnk',true)
         ];
         $this->db->insert('detail_pengambilan', $data);
       }else if(isset($tgl2)){
@@ -73,8 +70,11 @@ class Konsumen_model extends CI_model {
         $data = [
           "norang" => $this->input->post('norang',true),
           "status1" => $this->input->post('stnk',true),
-          "tgl1" => date('Y-m-d',strtotime($tgl2)),
-          "nama1" => $this->input->post('pengambil_stnk',true)
+          "tgl1" => date('Y-m-d',strtotime($tgl1)),
+          "nama1" => $this->input->post('pengambil_stnk',true),
+          "status2" => $this->input->post('plat',true),
+          "tgl2" => date('Y-m-d',strtotime($tgl2)),
+          "nama2" => $this->input->post('pengambil_plat',true)
         ];
         $this->db->insert('detail_pengambilan', $data);
 

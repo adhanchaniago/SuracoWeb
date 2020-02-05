@@ -70,7 +70,7 @@
 								<?php if (isset($ambil['status2'])){ ?>
 									<input type="date" name="tgl_plat" class="form-control" id="email" value="<?= $ambil['tgl2'] ?>" readonly>
 								<?php }else{ ?>
-									<input type="date" name="tgl_plat" class="form-control" id="email">
+									<input type="date" name="tgl_plat" class="form-control" id="email" value="">
 								<?php } ?>
 								<small class="form-text text-danger"><?= form_error('email'); ?></small>
 							</div>
